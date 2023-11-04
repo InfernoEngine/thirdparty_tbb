@@ -198,7 +198,7 @@ private:
                 hwloc_cpuset_t& current_mask = core_types_affinity_masks_list[core_type];
                 current_mask = hwloc_bitmap_alloc();
 
-                if (!hwloc_cpukinds_get_info(topology, core_type, current_mask, &efficiency, nullptr, nullptr, 0)
+                if (!hwloc_cpukinds_get_info(topology, core_type, current_mask, &efficiency, nullptr, 0)
                     && efficiency >= 0
                 ) {
                     hwloc_bitmap_and(current_mask, current_mask, process_cpu_affinity_mask);

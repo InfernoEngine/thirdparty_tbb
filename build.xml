@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<Module>
+	
+	<GlobalSolutionName>ThirdParty</GlobalSolutionName>
+	<GlobalNamespace>potato</GlobalNamespace>
+
+	<StaticLibrary>
+		<Name>thirdparty_tbb</Name>
+		<SourceRoot>src</SourceRoot>
+		<ExportedIncludeDirectory>include</ExportedIncludeDirectory>
+		<LocalIncludeDirectory>include</LocalIncludeDirectory>
+		<PreprocessorDefines>__TBB_SOURCE_DIRECTLY_INCLUDED=1;__TBB_BUILD=1</PreprocessorDefines>
+		<ThirdParty>true</ThirdParty>
+		<ThirdPartySourceFile>
+			tbb\address_waiter.cpp;
+			tbb\allocator.cpp;
+			tbb\arena.cpp;
+			tbb\arena_slot.cpp;
+			tbb\concurrent_bounded_queue.cpp;
+			tbb\dynamic_link.cpp;
+			tbb\exception.cpp;
+			tbb\global_control.cpp;
+			tbb\governor.cpp;
+			tbb\itt_notify.cpp;
+			tbb\main.cpp;
+			tbb\market.cpp;
+			tbb\misc.cpp;
+			tbb\misc_ex.cpp;
+			tbb\observer_proxy.cpp;
+			tbb\parallel_pipeline.cpp;
+			tbb\private_server.cpp;
+			tbb\profiling.cpp;
+			tbb\queuing_rw_mutex.cpp;
+			tbb\rml_tbb.cpp;
+			tbb\rtm_mutex.cpp;
+			tbb\rtm_rw_mutex.cpp;
+			tbb\semaphore.cpp;
+			tbb\small_object_pool.cpp;
+			tbb\task.cpp;
+			tbb\task_dispatcher.cpp;
+			tbb\task_group_context.cpp;
+			tbb\tcm_adaptor.cpp;
+			tbb\threading_control.cpp;
+			tbb\thread_dispatcher.cpp;
+			tbb\thread_request_serializer.cpp;
+			tbb\version.cpp;
+			tbb\tools_api\ittnotify_static.c
+		</ThirdPartySourceFile>
+		<Dependency>thirdparty_hwloc</Dependency>
+	</StaticLibrary>
+
+</Module>

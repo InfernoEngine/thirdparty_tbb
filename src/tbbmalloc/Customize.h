@@ -89,12 +89,16 @@ namespace internal {
 
 #define MALLOC_EXTRA_INITIALIZATION rml::internal::init_tbbmalloc()
 
+#if 0
 // Need these to work regardless of tools support.
 namespace tbb {
 namespace detail {
 namespace d1 {
 
-    enum notify_type {prepare=0, cancel, acquired, releasing};
+#ifndef HAS_notify_type
+    enum notify_type { prepare = 0, cancel, acquired, releasing, destroy };
+#define HAS_notify_type
+#endif
 
 #if TBB_USE_PROFILING_TOOLS
     inline void call_itt_notify(notify_type t, void *ptr) {
@@ -122,6 +126,7 @@ namespace d1 {
 } // namespace d1
 } // namespace detail
 } // namespace tbb
+#endif
 
 #include "oneapi/tbb/detail/_aggregator.h"
 

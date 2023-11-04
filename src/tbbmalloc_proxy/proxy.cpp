@@ -659,10 +659,23 @@ bool BytecodesAreKnown(const unicode_char_t *dllName)
     const char *funcName[] = {"free", "_msize", "_aligned_free", "_aligned_msize", 0};
     HMODULE module = GetModuleHandle(dllName);
 
+#ifndef UNICODE
+	const char* dllStr = dllName;
+#else
+	const size_t sz = 128; // all DLL name must fit
+
+	char buffer[sz];
+	size_t real_sz;
+	char* dllStr = buffer;
+
+	errno_t ret = wcstombs_s(&real_sz, dllStr, sz, dllName, sz - 1);
+	__TBB_ASSERT(!ret, "Dll name conversion failed");
+#endif
+
     if (!module)
         return false;
     for (int i=0; funcName[i]; i++)
-        if (! IsPrologueKnown(dllName, funcName[i], known_bytecodes, module)) {
+        if (! IsPrologueKnown(dllStr, funcName[i], known_bytecodes, module)) {
             fprintf(stderr, "TBBmalloc: skip allocation functions replacement in " WCHAR_SPEC
                     ": unknown prologue for function " WCHAR_SPEC "\n", dllName, funcName[i]);
             return false;

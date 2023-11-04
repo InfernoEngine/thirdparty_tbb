@@ -32,7 +32,7 @@
     #include <malloc.h>
 
     // Unify system calls
-    #define dlopen( name, flags )   LoadLibrary( name )
+    #define dlopen( name, flags )   LoadLibraryA( name )
     #define dlsym( handle, name )   GetProcAddress( handle, name )
     #define dlclose( handle )       ( ! FreeLibrary( handle ) )
     #define dlerror()               GetLastError()
@@ -215,7 +215,7 @@ namespace r1 {
     #if _WIN32
         // Get handle of our DLL first.
         HMODULE handle;
-        BOOL brc = GetModuleHandleEx(
+        BOOL brc = GetModuleHandleExA(
             GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
             (LPCSTR)( & dynamic_link ), // any function inside the library can be used for the address
             & handle
@@ -226,7 +226,7 @@ namespace r1 {
             return;
         }
         // Now get path to our DLL.
-        DWORD drc = GetModuleFileName( handle, ap_data._path, static_cast< DWORD >( PATH_MAX ) );
+        DWORD drc = GetModuleFileNameA( handle, ap_data._path, static_cast< DWORD >( PATH_MAX ) );
         if ( drc == 0 ) { // Error occurred.
             int err = GetLastError();
             DYNAMIC_LINK_WARNING( dl_sys_fail, "GetModuleFileName", err );
@@ -380,7 +380,7 @@ namespace r1 {
     static dynamic_link_handle global_symbols_link( const char* library, const dynamic_link_descriptor descriptors[], std::size_t required ) {
         dynamic_link_handle library_handle{};
 #if _WIN32
-        auto res = GetModuleHandleEx(0, library, &library_handle);
+        auto res = GetModuleHandleExA(0, library, &library_handle);
         __TBB_ASSERT_EX((res && library_handle) || (!res && !library_handle), nullptr);
 #else /* _WIN32 */
     #if !__TBB_DYNAMIC_LOAD_ENABLED /* only __TBB_WEAK_SYMBOLS_PRESENT is defined */

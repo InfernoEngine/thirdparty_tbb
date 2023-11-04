@@ -65,7 +65,10 @@ inline namespace d0 {
 namespace tbb {
 namespace detail {
 namespace d1 {
-    enum notify_type {prepare=0, cancel, acquired, releasing, destroy};
+#ifndef HAS_notify_type
+	enum notify_type { prepare = 0, cancel, acquired, releasing, destroy };
+#define HAS_notify_type
+#endif
     enum itt_domain_enum { ITT_DOMAIN_FLOW=0, ITT_DOMAIN_MAIN=1, ITT_DOMAIN_ALGO=2, ITT_NUM_DOMAINS };
 } // namespace d1
 
