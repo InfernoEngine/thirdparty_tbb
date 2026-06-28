@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="no" ?>
 <Build>
 
-	<Module name="ThirdPartyTBB" type="thirdparty">
+	<Module name="ThirdParty" type="thirdparty">
 
 		<StaticLibrary>
-			<Name>thirdparty_tbb</Name>
+			<Name>ThirdParty.TBB</Name>
 			<SourceRoot>src</SourceRoot>
 			<ExportedIncludeDirectory>include</ExportedIncludeDirectory>
 			<LocalIncludeDirectory>include</LocalIncludeDirectory>
@@ -45,7 +45,7 @@
 				tbb\version.cpp;
 				tbb\tools_api\ittnotify_static.c
 			</ThirdPartySourceFile>
-			<Dependency>thirdparty_hwloc</Dependency>
+			<Dependency>ThirdParty.HWLoc</Dependency>
 		</StaticLibrary>
 
 	</Module>
